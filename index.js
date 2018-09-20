@@ -1,19 +1,23 @@
-var katex = require("katex");
+let katex = require("katex")
+let path = require('path')
+
+let cfgs = (function () {
+  let cssFile = 'katex/dist/katex.min.css'
+  let cssPath = require.resolve(cssFile)
+  let filePath = path.dirname(cssPath)
+  let cssName = path.basename(cssPath)
+  let cssList = []
+  cssList.push(cssName)
+  return {
+    assets: filePath,
+	js: [],
+    css: cssList
+  }
+})()
 
 module.exports = {
-    book: {
-        assets: "./static",
-        js: [],
-        css: [
-            "katex.min.css"
-        ]
-    },
-    ebook: {
-        assets: "./static",
-        css: [
-            "katex.min.css"
-        ]
-    },
+    book: cfgs,
+    ebook: cfgs,
     blocks: {
         math: {
             shortcuts: {
@@ -23,11 +27,10 @@ module.exports = {
             },
             process: function(blk) {
                 var tex = blk.body;
-                var isInline = !(tex[0] == "\n");
+                var isInline = !(tex[0] == "\n" || tex[0] == "\r");
                 var output = katex.renderToString(tex, {
                     displayMode: !isInline
                 });
-
                 return output;
             }
         }
