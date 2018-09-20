@@ -13,6 +13,8 @@ then run `gitbook install`.
 
 ## Usage
 
+<https://khan.github.io/KaTeX/function-support.html>
+
 ```
 Inline math: $$\int_{-\infty}^\infty g(x) dx$$
 
