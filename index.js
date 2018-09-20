@@ -27,11 +27,10 @@ module.exports = {
             },
             process: function(blk) {
                 var tex = blk.body;
-                var isInline = !(tex[0] == "\n");
+                var isInline = !(tex[0] == "\n" || tex[0] == "\r");
                 var output = katex.renderToString(tex, {
                     displayMode: !isInline
                 });
-
                 return output;
             }
         }
